@@ -6,196 +6,179 @@
     <title>Donghan Kim</title>
     <style>
         :root {
-            --primary-color: #4a6fff;
-            --secondary-color: #f5f5f5;
+            --primary-color: #3b82f6;
             --text-color: #333;
-            --highlight-color: #3b5998;
+            --background-color: #f8fafc;
+            --card-color: #ffffff;
+            --border-color: #e5e7eb;
+            --hover-color: #dbeafe;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         body {
-            background-color: #f9f9f9;
+            background-color: var(--background-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
         }
 
         header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
-            padding: 3rem 0;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            gap: 1.5rem;
             margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--primary-color);
-            margin-bottom: 1.5rem;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .header-content h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
             color: var(--primary-color);
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.75rem;
         }
 
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .social-links a:hover {
-            transform: translateY(-3px);
-            background-color: var(--highlight-color);
-        }
-
-        .sections {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .sections {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
         .section {
-            background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
         }
 
         .section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
         }
 
         .about-text {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
 
         .skill {
-            background-color: var(--secondary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
             font-size: 0.9rem;
         }
 
-        .projects {
+        .project-list {
             display: grid;
-            grid-template-columns: 1fr;
             gap: 1rem;
         }
 
         .project {
-            border: 1px solid var(--secondary-color);
-            border-radius: 8px;
             padding: 1rem;
-            transition: all 0.3s ease;
+            border-radius: 6px;
+            background-color: #f8fafc;
+            transition: all 0.2s ease;
         }
 
         .project:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-3px);
+            background-color: var(--hover-color);
         }
 
         .project h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            margin: 0 0 0.25rem 0;
+            color: var(--primary-color);
+        }
+
+        .project p {
             margin-bottom: 0.5rem;
-            color: var(--highlight-color);
+            font-size: 0.95rem;
+        }
+
+        .project a {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project a:hover {
+            text-decoration: underline;
         }
 
         .footer {
             text-align: center;
-            margin-top: 3rem;
             padding: 1rem;
             color: #666;
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
         }
 
-        .contact-form {
-            display: grid;
-            gap: 1rem;
-        }
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
 
-        .contact-form input,
-        .contact-form textarea {
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .contact-form textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .contact-form button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            background-color: var(--highlight-color);
+            .social-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -203,100 +186,137 @@
     <div class="container">
         <header>
             <img src="profile_image.JPG" alt="Profile Image" class="profile-img">
-            <h1>Donghan Kim</h1>
-            <p class="tagline">CS student | Software Engineer</p>
-            <div class="social-links">
-                <a href="https://github.com/Donghan5" target="_blank" title="GitHub">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" fill="white"/>
-                    </svg>
-                </a>
-                <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z" fill="white"/>
-                    </svg>
-                </a>
+            <div class="header-content">
+                <h1>Donghan Kim</h1>
+                <p class="tagline">CS student | Software Engineer</p>
+                <div class="social-links">
+                    <a href="https://github.com/Donghan5" target="_blank" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z" fill="white"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </header>
 
-        <div class="sections">
-            <div class="section">
-                <h2>About Me</h2>
-                <p class="about-text">
-					I am a CS student at 42. I am passionate about Machine Learning/AI and Web Development.
-                </p>
-                <h3>Tech Stack</h3>
-                <div class="skills">
-                    <span class="skill">C</span>
-                    <span class="skill">C++</span>
-                    <span class="skill">Docker</span>
-                    <span class="skill">Python</span>
-                    <span class="skill">Git</span>
-                </div>
+        <section class="section">
+            <h2>About Me</h2>
+            <p class="about-text">
+                I am a CS student at 42. I am passionate about Machine Learning/AI and Web Development.
+            </p>
+            <h3>Tech Stack</h3>
+            <div class="skills">
+                <span class="skill">C</span>
+                <span class="skill">C++</span>
+                <span class="skill">Docker</span>
+                <span class="skill">Python</span>
+                <span class="skill">Git</span>
             </div>
+        </section>
 
-            <div class="section">
-                <h2>Projects</h2>
-                <div class="projects">
-                    <div class="project">
-                        <h3>42 Projects</h3>
-                        <p>Inner circle</p>
-                        <a href="https://github.com/Donghan5/42_Course">View Details →</a>
-						<h3>Libft</h3>
-						<p>Recreate standard C library functions</p>
-						<a href="git@github.com:Donghan5/libft.git">View Details →</a>
-						<h3>ft_printf</h3>
-						<p>Recreate printf function</p>
-						<a href="git@github.com:Donghan5/ft_printf.git">View Details →</a>
-						<h3>get_next_line</h3>
-						<p>Read a line from a file descriptor</p>
-						<a href="git@github.com:Donghan5/get_next_line.git">View Details →</a>
-						<h3>Born2beRoot</h3>
-						<p>Understanding basic of virtual machine</p>
-						<h3>minitalk</h3>
-						<p>Communication between two processes</p>
-						<a href="git@github.com:Donghan5/minitalk.git">View Details →</a>
-						<h3>so_long</h3>
-						<p>Simple 2D game</p>
-						<a href="git@github.com:Donghan5/so_long.git">View Details →</a>
-						<h3>push_swap</h3>
-						<p>Sort a stack of numbers</p>
-						<a href="git@github.com:Donghan5/push_swap.git">View Details →</a>
-						<h3>philosopher</h3>
-						<p>Dining philosopher problem</p>
-						<a href="git@github.com:Donghan5/philosopher.git">View Details →</a>
-						<h3>minishell</h3>
-						<p>Simple shell</p>
-						<a href="git@github.com:Donghan5/minishell.git">View Details →</a>
-						<h3>miniRT</h3>
-						<a href="git@github.com:Donghan5/miniRT.git">View Details →</a>
-						<h3>netpractice</h3>
-						<p>Understanding of network and routing</p>
-						<h3>CPP_Modules</h3>
-						<p>C++ practice (CPP Module00 to CPP Modules09)</p>
-						<a href="git@github.com:Donghan5/CPP_Modules.git">View Details →</a>
-						<h3>Inception</h3>
-						<p>Understanding of docker and docker-compose</p>
-						<a href="git@github.com:Donghan5/inception.git">View Details →</a>
-					</div>
-                </div>
+        <section class="section">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>CS student at 42</h3>
+                <p>Aim to get RNCP 7 (database architect and data) | 2024 - Present</p>
+                <p>Developed lower level program like printf, shell, webserver using C and C++.</p>
             </div>
+        </section>
 
-            <div class="section">
-                <h2>Experience</h2>
-                <div class="experience">
-                    <div class="experience-item">
-                        <h3>CS student at 42</h3>
-                        <p>Aim to get RNCP 7 (database architect and data) | 2024 - Present</p>
-                        <p>Developed lower level program like printf, shell, webserver using C and C++.</p>
-                    </div>
-                    </div>
+        <section class="section">
+            <h2>Projects</h2>
+            <div class="project-list">
+                <div class="project">
+                    <h3>42 Inner Circle</h3>
+                    <p>My core projects at 42 School</p>
+                    <a href="https://github.com/Donghan5/42_Course">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>Libft</h3>
+                    <p>Recreate standard C library functions</p>
+                    <a href="https://github.com/Donghan5/libft">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>ft_printf</h3>
+                    <p>Recreate printf function</p>
+                    <a href="https://github.com/Donghan5/ft_printf">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>get_next_line</h3>
+                    <p>Read a line from a file descriptor</p>
+                    <a href="https://github.com/Donghan5/get_next_line">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>Born2beRoot</h3>
+                    <p>Understanding basic of virtual machine</p>
+                </div>
+
+                <div class="project">
+                    <h3>minitalk</h3>
+                    <p>Communication between two processes</p>
+                    <a href="https://github.com/Donghan5/minitalk">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>so_long</h3>
+                    <p>Simple 2D game</p>
+                    <a href="https://github.com/Donghan5/so_long">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>push_swap</h3>
+                    <p>Sort a stack of numbers</p>
+                    <a href="https://github.com/Donghan5/push_swap">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>philosopher</h3>
+                    <p>Dining philosopher problem</p>
+                    <a href="https://github.com/Donghan5/philosopher">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>minishell</h3>
+                    <p>Simple shell implementation</p>
+                    <a href="https://github.com/Donghan5/minishell">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>miniRT</h3>
+                    <p>Ray tracing implementation</p>
+                    <a href="https://github.com/Donghan5/miniRT">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>netpractice</h3>
+                    <p>Understanding of network and routing</p>
+                </div>
+
+                <div class="project">
+                    <h3>CPP_Modules</h3>
+                    <p>C++ practice (CPP Module00 to CPP Modules09)</p>
+                    <a href="https://github.com/Donghan5/CPP_Modules">View Repository →</a>
+                </div>
+
+                <div class="project">
+                    <h3>Inception</h3>
+                    <p>Understanding of docker and docker-compose</p>
+                    <a href="https://github.com/Donghan5/inception">View Repository →</a>
                 </div>
             </div>
-        </div>
+        </section>
 
         <footer class="footer">
-            <p>© 2025 Donghan Kim. All rights reserved.</p>
+            <p>© 2025 Donghan Kim</p>
         </footer>
     </div>
 </body>
