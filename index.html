@@ -3,320 +3,626 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donghan Kim</title>
+    <title>Donghan Kim | Software engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3b82f6;
-            --text-color: #333;
-            --background-color: #f8fafc;
-            --card-color: #ffffff;
-            --border-color: #e5e7eb;
-            --hover-color: #dbeafe;
+            --bg-color: #0f172a;
+            --bg-accent: #1e293b;
+            --primary-color: #10b981;
+            --secondary-color: #3b82f6;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --accent-glow: 0 0 10px rgba(16, 185, 129, 0.5);
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         body {
-            background-color: var(--background-color);
+            background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.5;
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(15, 23, 42, 0.97) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 23, 42, 0.97) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            z-index: -1;
+        }
+
+        /* Animated Cursor (blink effect) */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 22px;
+            background-color: var(--primary-color);
+            animation: blink 1s step-end infinite;
+            position: relative;
+            top: 4px;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2rem 1.5rem;
         }
 
         header {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Terminal-style header */
+        .terminal-header {
+            background-color: var(--bg-accent);
+            padding: 0.5rem 1rem;
+            border-radius: 8px 8px 0 0;
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 6px;
+            margin-right: 12px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .button-red { background-color: #ef4444; }
+        .button-yellow { background-color: #f59e0b; }
+        .button-green { background-color: #10b981; }
+
+        .terminal-title {
+            flex-grow: 1;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            padding: 1rem;
         }
 
         .profile-img {
             width: 100px;
             height: 100px;
-            border-radius: 50%;
+            border-radius: 8px;
             object-fit: cover;
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--accent-glow);
         }
 
         .header-content h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.25rem;
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
             color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .header-content h1 span {
+            color: var(--secondary-color);
         }
 
         .tagline {
+            font-family: var(--font-mono);
             font-size: 1rem;
-            color: #666;
-            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .tagline::before {
+            content: '> ';
+            color: var(--primary-color);
+            margin-right: 5px;
         }
 
         .social-links {
             display: flex;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            background-color: var(--primary-color);
-            color: white;
+            color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.2s ease;
+            font-size: 1.2rem;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
+            color: var(--primary-color);
             transform: translateY(-2px);
-            opacity: 0.9;
         }
 
         .section {
-            background-color: var(--card-color);
+            background-color: var(--bg-accent);
             border-radius: 8px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+        }
+
+        .section-title::before {
+            content: '> ';
+            color: var(--primary-color);
+            margin-right: 5px;
+            font-weight: bold;
         }
 
         .section h2 {
             font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--text-color);
+            font-weight: 600;
         }
 
         .about-text {
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         .section h3 {
+            font-family: var(--font-mono);
             font-size: 1.1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: '# ';
+            color: var(--primary-color);
+            margin-right: 5px;
         }
 
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .skill {
-            background-color: var(--hover-color);
+            background-color: rgba(16, 185, 129, 0.1);
             color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
             font-size: 0.9rem;
+            font-family: var(--font-mono);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: var(--transition);
         }
 
-        .project-list {
-            display: grid;
-            gap: 1rem;
+        .skill:hover {
+            background-color: rgba(16, 185, 129, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--accent-glow);
         }
 
-        .project {
-            padding: 1rem;
-            border-radius: 6px;
-            background-color: #f8fafc;
-            transition: all 0.2s ease;
+        .experience-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        .project:hover {
-            background-color: var(--hover-color);
+        .experience-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
-        .project h3 {
-            font-size: 1.1rem;
-            margin: 0 0 0.25rem 0;
-            color: var(--primary-color);
-        }
-
-        .project p {
+        .experience-item h3 {
+            color: var(--secondary-color);
+            font-weight: 600;
             margin-bottom: 0.5rem;
+        }
+
+        .experience-duration {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .experience-duration i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        .experience-item p {
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
-        .project a {
-            display: inline-block;
+        .project-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card:hover::after {
+            width: 100%;
+        }
+
+        .project-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin: 0 0 0.75rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-card h3::before {
+            content: '$ ';
+            color: var(--primary-color);
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
             color: var(--primary-color);
             text-decoration: none;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-family: var(--font-mono);
+            transition: var(--transition);
         }
 
-        .project a:hover {
-            text-decoration: underline;
+        .project-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .project-link:hover i {
+            transform: translateX(3px);
         }
 
         .footer {
             text-align: center;
-            padding: 1rem;
-            color: #666;
+            padding: 2rem 0;
+            color: var(--text-muted);
             font-size: 0.9rem;
             border-top: 1px solid var(--border-color);
             margin-top: 2rem;
+            font-family: var(--font-mono);
         }
 
-        @media (max-width: 640px) {
-            header {
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        /* Floating tech animation */
+        .float-tech {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 1.5rem;
+            z-index: -1;
+            color: var(--primary-color);
+            animation: float 15s linear infinite;
+        }
+
+        .tech-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .tech-2 { top: 30%; right: 10%; animation-delay: 2s; }
+        .tech-3 { bottom: 20%; left: 15%; animation-delay: 5s; }
+        .tech-4 { bottom: 40%; right: 20%; animation-delay: 7s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .profile-container {
                 flex-direction: column;
                 text-align: center;
+                gap: 1rem;
             }
 
             .social-links {
                 justify-content: center;
             }
+
+            .tagline {
+                justify-content: center;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+
+            .terminal-title {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Tech Icons -->
+    <div class="float-tech tech-1"><i class="fab fa-c"></i></div>
+    <div class="float-tech tech-2"><i class="fab fa-python"></i></div>
+    <div class="float-tech tech-3"><i class="fab fa-docker"></i></div>
+    <div class="float-tech tech-4"><i class="fab fa-git-alt"></i></div>
+
     <div class="container">
         <header>
-            <img src="profile_image.JPG" alt="Profile Image" class="profile-img">
-            <div class="header-content">
-                <h1>Donghan Kim</h1>
-                <p class="tagline">CS student | Software Engineer</p>
-                <div class="social-links">
-                    <a href="https://github.com/Donghan5" target="_blank" title="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" fill="white"/>
-                        </svg>
-                    </a>
-                    <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z" fill="white"/>
-                        </svg>
-                    </a>
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button button-red"></div>
+                    <div class="terminal-button button-yellow"></div>
+                    <div class="terminal-button button-green"></div>
+                </div>
+                <div class="terminal-title">portfolio.sh — bash — 80×24</div>
+            </div>
+            <div class="profile-container">
+                <img src="/api/placeholder/400/400" alt="Donghan Kim" class="profile-img">
+                <div class="header-content">
+                    <h1>Donghan<span>_Kim</span></h1>
+                    <p class="tagline">CS Student | Software Engineer<span class="cursor"></span></p>
+                    <div class="social-links">
+                        <a href="https://github.com/Donghan5" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </header>
 
         <section class="section">
-            <h2>About Me</h2>
-            <p class="about-text">
-                I am a CS student at 42. I am passionate about Machine Learning/AI and Web Development.
-            </p>
-            <h3>Tech Stack</h3>
+            <div class="section-title">
+                <h2>about.me</h2>
+            </div>
+            <div class="about-text">
+                I am a CS student at 42. I aspire to become a software specialist with a strong focus on low-level programming,
+                system programming, and cybersecurity with AI.
+				Self taught and passionate about technology, I enjoy solving complex problems and learning new skills.
+            </div>
+            <h3>tech_stack</h3>
             <div class="skills">
                 <span class="skill">C</span>
                 <span class="skill">C++</span>
                 <span class="skill">Docker</span>
-                <span class="skill">Python</span>
                 <span class="skill">Git</span>
             </div>
         </section>
 
         <section class="section">
-            <h2>Experience</h2>
+            <div class="section-title">
+                <h2>experience.log</h2>
+            </div>
             <div class="experience-item">
-                <h3>CS student at 42</h3>
-                <p>Aim to get RNCP 7 (database architect and data) | 2024 - Present</p>
-                <p>Developed lower level program like printf, shell, webserver using C and C++.</p>
+                <h3>CS Student at 42</h3>
+                <p class="experience-duration"><i class="far fa-calendar-alt"></i> 2024 - Present</p>
+                <p>
+                    Aim to get RNCP 6 (Applicative software development)
+                    <br>
+                    Developed low-level programs using C and C++, focusing on fundamental computer science concepts
+                    and practical software engineering skills through project-based learning.
+                </p>
             </div>
         </section>
 
         <section class="section">
-            <h2>Projects</h2>
-            <div class="project-list">
-                <div class="project">
-                    <h3>42 Inner Circle</h3>
-                    <p>My core projects at 42 School</p>
-                    <a href="https://github.com/Donghan5/42_Course">View Repository →</a>
-                </div>
+            <div class="section-title">
+                <h2>projects.sh</h2>
+            </div>
 
-                <div class="project">
+            <h3>42_inner_circle</h3>
+            <div class="projects-container">
+                <div class="project-card">
                     <h3>Libft</h3>
-                    <p>Recreate standard C library functions</p>
-                    <a href="https://github.com/Donghan5/libft">View Repository →</a>
+                    <p class="project-description">Recreated standard C library functions, building a strong foundation in C programming.</p>
+                    <a href="https://github.com/Donghan5/libft" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>ft_printf</h3>
-                    <p>Recreate printf function</p>
-                    <a href="https://github.com/Donghan5/ft_printf">View Repository →</a>
+                    <p class="project-description">Implemented a custom printf function to understand variadic functions and string formatting.</p>
+                    <a href="https://github.com/Donghan5/ft_printf" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>get_next_line</h3>
-                    <p>Read a line from a file descriptor</p>
-                    <a href="https://github.com/Donghan5/get_next_line">View Repository →</a>
+                    <p class="project-description">Created a function to read a line from a file descriptor, handling buffer management efficiently.</p>
+                    <a href="https://github.com/Donghan5/get_next_line" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>Born2beRoot</h3>
-                    <p>Understanding basic of virtual machine</p>
+                    <p class="project-description">Set up and configured a virtual machine, gaining knowledge of system administration.</p>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>minitalk</h3>
-                    <p>Communication between two processes</p>
-                    <a href="https://github.com/Donghan5/minitalk">View Repository →</a>
+                    <p class="project-description">Implemented client-server communication between processes using UNIX signals.</p>
+                    <a href="https://github.com/Donghan5/minitalk" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>so_long</h3>
-                    <p>Simple 2D game</p>
-                    <a href="https://github.com/Donghan5/so_long">View Repository →</a>
+                    <p class="project-description">Developed a simple 2D game with graphics rendering and event handling.</p>
+                    <a href="https://github.com/Donghan5/so_long" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>push_swap</h3>
-                    <p>Sort a stack of numbers</p>
-                    <a href="https://github.com/Donghan5/push_swap">View Repository →</a>
+                    <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations.</p>
+                    <a href="https://github.com/Donghan5/push_swap" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>philosopher</h3>
-                    <p>Dining philosopher problem</p>
-                    <a href="https://github.com/Donghan5/philosopher">View Repository →</a>
+                    <p class="project-description">Solved the dining philosophers problem using threads and mutexes.</p>
+                    <a href="https://github.com/Donghan5/philosopher" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>minishell</h3>
-                    <p>Simple shell implementation</p>
-                    <a href="https://github.com/Donghan5/minishell">View Repository →</a>
+                    <p class="project-description">Developed a simple shell implementation with command parsing and execution.</p>
+                    <a href="https://github.com/Donghan5/minishell" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>miniRT</h3>
-                    <p>Ray tracing implementation</p>
-                    <a href="https://github.com/Donghan5/miniRT">View Repository →</a>
+                    <p class="project-description">Implemented a ray tracing engine to render 3D scenes with lighting effects.</p>
+                    <a href="https://github.com/Donghan5/miniRT" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>netpractice</h3>
-                    <p>Understanding of network and routing</p>
+                    <p class="project-description">Gained understanding of network configuration, IP addressing, and routing.</p>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>CPP_Modules</h3>
-                    <p>C++ practice (CPP Module00 to CPP Modules09)</p>
-                    <a href="https://github.com/Donghan5/CPP_Modules">View Repository →</a>
+                    <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming.</p>
+                    <a href="https://github.com/Donghan5/CPP_Modules" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
 
-                <div class="project">
+                <div class="project-card">
                     <h3>Inception</h3>
-                    <p>Understanding of docker and docker-compose</p>
-                    <a href="https://github.com/Donghan5/inception">View Repository →</a>
+                    <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose.</p>
+                    <a href="https://github.com/Donghan5/inception" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
                 </div>
             </div>
         </section>
 
         <footer class="footer">
-            <p>© 2025 Donghan Kim</p>
+            <p>© 2025 Donghan Kim | donghankim@localhost:~$ <span class="typing-animation">echo "Thank you for visiting"</span></p>
         </footer>
     </div>
 </body>
