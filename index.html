@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donghan Kim | Software engineer</title>
+    <title>Donghan Kim | Software Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -24,6 +24,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling effect */
         }
 
         body {
@@ -168,6 +172,7 @@
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-bottom: 1rem; /* Spacing for CTA buttons */
         }
 
         .social-links a {
@@ -175,12 +180,60 @@
             text-decoration: none;
             font-size: 1.2rem;
             transition: var(--transition);
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+        }
+        .social-links a i {
+            margin-right: 0.5rem; /* Space between icon and text */
         }
 
         .social-links a:hover {
             color: var(--primary-color);
             transform: translateY(-2px);
         }
+
+        /* CTA Button Styles Start */
+        .header-actions {
+            margin-top: 1.5rem; /* Adjust spacing from social links */
+            display: flex;
+            gap: 1rem; /* Space between buttons */
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+            border: 1px solid transparent; /* Default border */
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+        }
+        /* CTA Button Styles End */
+
 
         .section {
             background-color: var(--bg-accent);
@@ -189,7 +242,7 @@
             margin-bottom: 2rem;
             border: 1px solid var(--border-color);
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Prevent internal element overflow */
         }
 
         .section::before {
@@ -216,11 +269,16 @@
             font-weight: bold;
         }
 
-        .section h2 {
+        .section h2 { /* Section title style */
             font-size: 1.3rem;
             color: var(--text-color);
             font-weight: 600;
         }
+        .section h2 i { /* Section title icon style */
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
 
         .about-text {
             color: var(--text-muted);
@@ -229,21 +287,26 @@
             font-size: 0.95rem;
         }
 
-        .section h3 {
+        .section h3 { /* Subheading style (e.g., tech_stack, titles within projects.sh) */
             font-family: var(--font-mono);
             font-size: 1.1rem;
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Keep original color or consider var(--text-color) */
             margin-top: 1.5rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
         }
 
-        .section h3::before {
-            content: '# ';
+        .section h3::before { /* # or $ symbol before subheading */
+            content: '# '; /* Default */
             color: var(--primary-color);
             margin-right: 5px;
         }
+        .section h3 i { /* Subheading icon style */
+             margin-right: 0.5rem;
+             color: var(--primary-color); /* Uniform icon color */
+        }
+
 
         .skills {
             display: flex;
@@ -280,11 +343,16 @@
             border-bottom: none;
         }
 
-        .experience-item h3 {
-            color: var(--secondary-color);
+        .experience-item h3 { /* Experience item title style */
+            color: var(--text-color); /* Changed for better visibility */
             font-weight: 600;
             margin-bottom: 0.5rem;
+            font-family: var(--font-sans);
         }
+        .experience-item h3::before { /* Remove # before experience item title */
+            content: none;
+        }
+
 
         .experience-duration {
             font-family: var(--font-mono);
@@ -305,9 +373,6 @@
             font-size: 0.95rem;
         }
 
-        .project-item {
-            margin-bottom: 1.5rem;
-        }
 
         .projects-container {
             display: grid;
@@ -317,16 +382,18 @@
         }
 
         .project-card {
-            background-color: rgba(30, 41, 59, 0.5);
+            background-color: rgba(30, 41, 59, 0.5); /* Translucent background */
             border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 1.25rem;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .project-card::after {
+        .project-card::after { /* Top line animation on hover */
             content: '';
             position: absolute;
             top: 0;
@@ -346,7 +413,7 @@
             width: 100%;
         }
 
-        .project-card h3 {
+        .project-card h3 { /* Project card title */
             font-family: var(--font-mono);
             font-size: 1.1rem;
             color: var(--text-color);
@@ -355,7 +422,7 @@
             align-items: center;
         }
 
-        .project-card h3::before {
+        .project-card h3::before { /* $ symbol before project card title */
             content: '$ ';
             color: var(--primary-color);
             margin-right: 5px;
@@ -366,6 +433,7 @@
             color: var(--text-muted);
             margin-bottom: 1rem;
             font-size: 0.9rem;
+            flex-grow: 1; /* Allow description to fill remaining space */
         }
 
         .project-link {
@@ -376,12 +444,16 @@
             font-size: 0.9rem;
             font-family: var(--font-mono);
             transition: var(--transition);
+            margin-top: auto; /* Position link at the bottom of the card */
         }
 
-        .project-link i {
-            margin-left: 5px;
-            transition: var(--transition);
+        .project-link i.fa-github { /* GitHub icon on the left */
+            margin-right: 5px;
         }
+        .project-link i.fa-terminal { /* Terminal icon on the right */
+            margin-left: 5px;
+        }
+
 
         .project-link:hover {
             color: var(--secondary-color);
@@ -390,6 +462,10 @@
         .project-link:hover i {
             transform: translateX(3px);
         }
+         .project-link:hover i.fa-github { /* No movement for GitHub icon on hover */
+            transform: none;
+        }
+
 
         .footer {
             text-align: center;
@@ -404,13 +480,21 @@
         .footer p {
             margin-bottom: 1rem;
         }
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
 
         .typing-animation {
             overflow: hidden;
             border-right: 2px solid var(--primary-color);
             white-space: nowrap;
             margin: 0 auto;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.15em; /* Letter spacing */
             animation:
                 typing 3.5s steps(40, end),
                 blink-caret 0.75s step-end infinite;
@@ -430,22 +514,28 @@
         /* Floating tech animation */
         .float-tech {
             position: absolute;
-            opacity: 0.1;
+            opacity: 0.08; /* More subtle */
             font-size: 1.5rem;
             z-index: -1;
             color: var(--primary-color);
             animation: float 15s linear infinite;
+            will-change: transform; /* Animation performance optimization */
         }
 
-        .tech-1 { top: 10%; left: 5%; animation-delay: 0s; }
-        .tech-2 { top: 30%; right: 10%; animation-delay: 2s; }
-        .tech-3 { bottom: 20%; left: 15%; animation-delay: 5s; }
-        .tech-4 { bottom: 40%; right: 20%; animation-delay: 7s; }
+        .tech-1 { top: 10%; left: 5%; animation-delay: 0s; font-size: 1.8rem; }
+        .tech-2 { top: 30%; right: 10%; animation-delay: -2s; font-size: 2.2rem; } /* Negative delay for varied start times */
+        .tech-3 { bottom: 20%; left: 15%; animation-delay: -5s; font-size: 1.6rem; }
+        .tech-4 { bottom: 40%; right: 20%; animation-delay: -7s; font-size: 2.0rem; }
+        .tech-5 { top: 50%; left: 25%; animation-delay: -3s; font-size: 1.7rem; color: var(--secondary-color); }
+        .tech-6 { bottom: 10%; right: 5%; animation-delay: -9s; font-size: 2.1rem; color: var(--secondary-color); opacity: 0.07;}
+
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) translateX(5px) rotate(5deg) scale(1.05); }
+            50% { transform: translateY(-25px) translateX(-5px) rotate(-3deg) scale(1.1); }
+            75% { transform: translateY(-10px) translateX(10px) rotate(8deg) scale(1.02); }
+            100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
         }
 
         /* Media Queries */
@@ -459,27 +549,69 @@
             .social-links {
                 justify-content: center;
             }
+            .header-actions {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 80%;
+                max-width: 250px;
+            }
 
             .tagline {
                 justify-content: center;
             }
+            .tagline::before {
+                 display: none;
+            }
+            .tagline {
+                padding-left: 0;
+            }
+
 
             .projects-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* 1 column on mobile */
             }
 
             .terminal-title {
                 display: none;
             }
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+            .section h2 {
+                font-size: 1.2rem;
+            }
+        }
+         @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 1.6rem;
+            }
+            .tagline {
+                font-size: 0.9rem;
+            }
+            .skill {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .project-card h3 {
+                font-size: 1rem;
+            }
+            .project-description {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Tech Icons -->
-    <div class="float-tech tech-1"><i class="fab fa-c"></i></div>
+    <div class="float-tech tech-1"><i class="fab fa-docker"></i></div>
     <div class="float-tech tech-2"><i class="fab fa-python"></i></div>
-    <div class="float-tech tech-3"><i class="fab fa-docker"></i></div>
+    <div class="float-tech tech-3"><i class="fas fa-network-wired"></i></div>
     <div class="float-tech tech-4"><i class="fab fa-git-alt"></i></div>
+    <div class="float-tech tech-5"><i class="fas fa-terminal"></i></div>
+    <div class="float-tech tech-6"><i class="fab fa-linux"></i></div>
+
 
     <div class="container">
         <header>
@@ -489,156 +621,220 @@
                     <div class="terminal-button button-yellow"></div>
                     <div class="terminal-button button-green"></div>
                 </div>
-                <div class="terminal-title">portfolio.sh — bash — 80×24</div>
+                <div class="terminal-title">donghan_kim_portfolio.sh — zsh — 80×24</div>
             </div>
             <div class="profile-container">
-                <!-- 증명사진 추가 -->
-                <img src="profile_image.JPG" alt="Donghan Kim" class="profile-img">
+                <img src="profile_image.JPG" alt="Donghan Kim Profile Photo" class="profile-img" onerror="this.src='https://placehold.co/100x100/0f172a/e2e8f0?text=DK'; this.onerror=null;">
                 <div class="header-content">
                     <h1>Donghan<span>_Kim</span></h1>
-                    <p class="tagline">CS Student | Software Engineer<span class="cursor"></span></p>
+                    <p class="tagline"> Software Engineer | Future Cloud/DevOps/MLOps Engineer | CS Student<span class="cursor"></span></p>
                     <div class="social-links">
-                        <a href="https://github.com/Donghan5" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
+                        <a href="https://github.com/Donghan5" target="_blank" title="Visit GitHub Profile">
+                            <i class="fab fa-github"></i> GitHub
                         </a>
-                        <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
+                        <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="Visit LinkedIn Profile">
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
                         </a>
+                    </div>
+                    <div class="header-actions">
+                        <a href="#section-projects" class="btn btn-primary">View Projects</a>
+                        <a href="YOUR_CV_LINK_HERE" target="_blank" class="btn btn-secondary">Download CV</a>
                     </div>
                 </div>
             </div>
         </header>
 
-        <section class="section">
+        <section class="section" id="section-about">
             <div class="section-title">
-                <h2>about.me</h2>
+                <h2><i class="fas fa-user-astronaut"></i>about.me</h2>
             </div>
             <div class="about-text">
-				I am a CS student at 42. Pursuing a Master's degree of Computer Science (Title, RNCP 7 Specialize in Networks and System Administration).
-				Passionate about AI/ML. Self taught and passionate about technology, I enjoy solving complex problems and learning new skills.
+				I am a CS student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science, specializing in Networks and System Administration.
+                I am passionate about AI/ML.
+                I enjoy solving complex problems, learning new technologies, and bridging the gap between software development and IT operations.
             </div>
-            <h3>tech_stack</h3>
+            <h3><i class="fas fa-cogs"></i>tech_stack</h3>
             <div class="skills">
                 <span class="skill">C</span>
                 <span class="skill">C++</span>
+                <span class="skill">Python</span>
+                <span class="skill">Shell Script</span>
+                <span class="skill">Linux</span>
                 <span class="skill">Docker</span>
                 <span class="skill">Git</span>
             </div>
+
+            <h3><i class="fas fa-rocket"></i>exploring_now</h3>
+            <div class="skills">
+                <span class="skill" style="background-color: rgba(59, 130, 246, 0.1); color: var(--secondary-color); border-color: rgba(59, 130, 246, 0.3);">Kubernetes</span>
+                <span class="skill" style="background-color: rgba(59, 130, 246, 0.1); color: var(--secondary-color); border-color: rgba(59, 130, 246, 0.3);">AWS</span>
+                <span class="skill" style="background-color: rgba(59, 130, 246, 0.1); color: var(--secondary-color); border-color: rgba(59, 130, 246, 0.3);">Jenkins</span>
+                <span class="skill" style="background-color: rgba(59, 130, 246, 0.1); color: var(--secondary-color); border-color: rgba(59, 130, 246, 0.3);">Terraform</span>
+            </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="section-experience">
             <div class="section-title">
-                <h2>experience.log</h2>
+                <h2><i class="fas fa-briefcase"></i>experience.log</h2>
             </div>
             <div class="experience-item">
-                <h3>CS Student at 42</h3>
+                <h3>42 Paris - CS Student</h3>
                 <p class="experience-duration"><i class="far fa-calendar-alt"></i> 2024 - Present</p>
                 <p>
-                    Aim to get RNCP 7 (Equivalent to a Master's degree) in Computer Science, specializing networks and system administration with strong focus on AI/ML.
+                    Pursuing RNCP Level 7 (Master's equivalent) in Computer Science, specializing in Networks and System Administration, with a strong focus on AI/ML.
                     <br>
-                    Developed low-level programs using C and C++, focusing on fundamental computer science concepts
-                    and practical software engineering skills through project-based learning.
+                    Developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (e.g., Born2beRoot),
+                    and deploying containerized applications with Docker (i.e. Inception project), preparing for a career in Cloud/DevOps/MLOps.
                 </p>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="section-projects">
             <div class="section-title">
-                <h2>projects.sh</h2>
+                <h2><i class="fas fa-tasks"></i>projects.sh</h2>
             </div>
 
-            <h3>42_inner_circle</h3>
+            <h3><i class="fas fa-lightbulb"></i>Personal Project</h3>
             <div class="projects-container">
+                <div class="project-card">
+                    <h3>Code Educator</h3>
+                    <p class="project-description">A CLI chatbot to help learn and practice coding. Developed in Python, designed for interactive learning of concepts.</p>
+                    <a href="https://github.com/Donghan5/code_educator" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+
+			<h3 style="margin-top: 2rem;"><i class="fas fa-school"></i>42 Inner Circle Projects</h3>
+			<div class="projects-container">
                 <div class="project-card">
                     <h3>Libft</h3>
                     <p class="project-description">Recreated standard C library functions, building a strong foundation in C programming.</p>
-                    <a href="https://github.com/Donghan5/libft" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <a href="https://github.com/Donghan5/libft" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>ft_printf</h3>
                     <p class="project-description">Implemented a custom printf function to understand variadic functions and string formatting.</p>
-                    <a href="https://github.com/Donghan5/ft_printf" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <a href="https://github.com/Donghan5/ft_printf" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>get_next_line</h3>
                     <p class="project-description">Created a function to read a line from a file descriptor, handling buffer management efficiently.</p>
-                    <a href="https://github.com/Donghan5/get_next_line" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <a href="https://github.com/Donghan5/get_next_line" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>Born2beRoot</h3>
-                    <p class="project-description">Set up and configured a virtual machine, gaining knowledge of system administration.</p>
-                </div>
+                    <p class="project-description">Set up and configured a virtual machine, gaining knowledge of system administration. (Debian, UFW, WordPress, etc.)</p>
+                    </div>
 
                 <div class="project-card">
                     <h3>minitalk</h3>
-                    <p class="project-description">Implemented client-server communication between processes using UNIX signals.</p>
-                    <a href="https://github.com/Donghan5/minitalk" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Implemented client-server communication between two processes using UNIX signals (SIGUSR1, SIGUSR2).</p>
+                    <a href="https://github.com/Donghan5/minitalk" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>so_long</h3>
-                    <p class="project-description">Developed a simple 2D game with graphics rendering and event handling.</p>
-                    <a href="https://github.com/Donghan5/so_long" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Developed a simple 2D game with collectibles and an exit, using the MiniLibX library for graphics rendering and event handling.</p>
+                    <a href="https://github.com/Donghan5/so_long" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>push_swap</h3>
-                    <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations.</p>
-                    <a href="https://github.com/Donghan5/push_swap" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations, optimizing for the fewest moves.</p>
+                    <a href="https://github.com/Donghan5/push_swap" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
-                    <h3>philosopher</h3>
-                    <p class="project-description">Solved the dining philosophers problem using threads and mutexes.</p>
-                    <a href="https://github.com/Donghan5/philosopher" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <h3>Philosophers</h3>
+                    <p class="project-description">Solved the dining philosophers problem using C threads and mutexes to prevent deadlocks and ensure fair resource access.</p>
+                    <a href="https://github.com/Donghan5/philosopher" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>minishell</h3>
-                    <p class="project-description">Developed a simple shell implementation with command parsing and execution.</p>
-                    <a href="https://github.com/Donghan5/minishell" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Developed a simple UNIX shell implementation with command parsing, execution, and basic job control features.</p>
+                    <a href="https://github.com/Donghan5/minishell" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>miniRT</h3>
-                    <p class="project-description">Implemented a ray tracing engine to render 3D scenes with lighting effects.</p>
-                    <a href="https://github.com/Donghan5/miniRT" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Implemented a ray tracing engine in C to render 3D scenes with various geometric objects and lighting effects.</p>
+                    <a href="https://github.com/Donghan5/miniRT" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
-                    <h3>netpractice</h3>
-                    <p class="project-description">Gained understanding of network configuration, IP addressing, and routing.</p>
-                </div>
+                    <h3>NetPractice</h3>
+                    <p class="project-description">Gained practical understanding of network configuration, IP addressing, subnetting, and routing concepts through exercises.</p>
+                     </div>
 
                 <div class="project-card">
-                    <h3>CPP_Modules</h3>
-                    <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming.</p>
-                    <a href="https://github.com/Donghan5/CPP_Modules" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <h3>CPP Modules</h3>
+                    <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming concepts and practices.</p>
+                    <a href="https://github.com/Donghan5/CPP_Modules" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
 
                 <div class="project-card">
                     <h3>Inception</h3>
-                    <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose.</p>
-                    <a href="https://github.com/Donghan5/inception" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
+                    <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose, including services like Nginx, WordPress, and MariaDB.</p>
+                    <a href="https://github.com/Donghan5/inception" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
                 </div>
             </div>
-
-			<h3>Personal project</h3>
-			<div class="projects-container">
-				<div class="project-card">
-					<h3>Code Educator</h3>
-					<p class="project-description">A CLI chatbot to learn and practice coding.</p>
-					<a href="https://github.com/Donghan5/code_educator" class="project-link" target="_blank">git clone <i class="fas fa-terminal"></i></a>
-				</div>
-			</div>
         </section>
 
-        <footer class="footer">
-            <p>© 2025 Donghan Kim | donghankim@localhost:~$ <span class="typing-animation">echo "Thank you for visiting"</span></p>
+        <footer class="footer" id="section-contact">
+            <p>
+                <a href="mailto:your-real-email@example.com">
+                    <i class="fas fa-envelope"></i> Get in Touch: your-real-email@example.com
+                </a>
+            </p>
+            <p>© <span id="currentYear"></span> Donghan Kim | Last updated: <span id="lastUpdated"></span></p>
+            <p>donghankim@portfolio:~$ <span class="typing-animation">echo "Thank you for visiting!"</span></p>
         </footer>
     </div>
+
+    <script>
+        // Automatically update the current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Set the last updated date (e.g., June 2025)
+        const lastUpdateDate = new Date(2025, 5, 3); // Month is 0-indexed (5 is June)
+        const options = { year: 'numeric', month: 'long' }; // Options for date formatting
+        document.getElementById('lastUpdated').textContent = new Intl.DateTimeFormat('en-US', options).format(lastUpdateDate); // Changed locale to en-US
+
+        // Display placeholder image if profile image fails to load
+        const profileImg = document.querySelector('.profile-img');
+        if (profileImg) {
+            profileImg.onerror = function() {
+                this.src='https://placehold.co/100x100/0f172a/e2e8f0?text=DK'; // Placeholder image
+                this.onerror=null; // Prevent repeated errors
+            };
+        }
+    </script>
 </body>
 </html>
