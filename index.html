@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donghan Kim | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0a0e17;
             --bg-accent: #1e293b;
+            --bg-card: #1a2332;
             --primary-color: #10b981;
             --secondary-color: #3b82f6;
+            --accent-color: #8b5cf6;
             --text-color: #e2e8f0;
             --text-muted: #94a3b8;
+            --text-light: #cbd5e1;
             --border-color: #334155;
-            --accent-glow: 0 0 15px rgba(16, 185, 129, 0.5);
-            --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+            --accent-glow: 0 0 30px rgba(16, 185, 129, 0.3);
+            --secondary-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --gradient-primary: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -36,9 +48,11 @@
             color: var(--text-color);
             font-family: var(--font-sans);
             line-height: 1.6;
-            overflow: hidden; /* Prevent body scroll, handle it on #fullpage */
+            overflow: hidden;
+            position: relative;
         }
 
+        /* Enhanced Background */
         body::before {
             content: '';
             position: fixed;
@@ -47,20 +61,58 @@
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(circle at 25% 25%, rgba(16, 185, 129, 0.1), transparent 30%),
-                radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1), transparent 30%);
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 60% 20%, rgba(139, 92, 246, 0.1), transparent 35%);
+            z-index: -2;
+        }
+
+        /* Animated particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(16, 185, 129, 0.4), transparent),
+                radial-gradient(1px 1px at 60% 70%, rgba(59, 130, 246, 0.3), transparent),
+                radial-gradient(1px 1px at 90% 40%, rgba(139, 92, 246, 0.2), transparent);
+            background-size: 100px 100px, 80px 80px, 120px 120px;
+            animation: particle-float 20s ease-in-out infinite;
             z-index: -1;
         }
 
-        /* --- Full Page Scroll Container --- */
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
         #fullpage {
             height: 100vh;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-color);
+        }
+
+        #fullpage::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #fullpage::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        #fullpage::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
         }
 
         .section {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             scroll-snap-align: start;
             display: flex;
@@ -70,9 +122,8 @@
             padding: 2rem;
             position: relative;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
+            transform: translateY(50px);
+            transition: var(--transition-smooth);
         }
         
         .section.is-visible {
@@ -81,17 +132,21 @@
         }
 
         .section-container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
+        /* Enhanced Typography */
         h1 {
-            font-size: 4rem;
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 800;
             font-family: var(--font-sans);
             color: var(--text-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
         h1 .highlight {
@@ -99,51 +154,113 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-fill-color: transparent;
+            position: relative;
+        }
+
+        h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.8); }
         }
 
         h2.section-title {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--text-color);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             text-align: left;
-        }
-        h2.section-title i {
-            margin-right: 1rem;
-            color: var(--primary-color);
-        }
-        
-        h3 {
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            text-align: left;
+            position: relative;
+            padding-left: 3rem;
         }
 
-        /* --- Intro Section --- */
-        #section-intro .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-weight: 300;
+        h2.section-title i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
         }
-        #section-intro .social-links {
+
+        /* Intro Section Enhancements */
+        #section-intro .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            position: relative;
+        }
+
+        #section-intro .subtitle::before {
+            content: '< ';
+            color: var(--primary-color);
+            font-family: var(--font-mono);
+        }
+
+        #section-intro .subtitle::after {
+            content: ' />';
+            color: var(--primary-color);
+            font-family: var(--font-mono);
+        }
+
+        .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
-        #section-intro .social-links a {
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
             color: var(--text-muted);
             font-size: 1.5rem;
             transition: var(--transition);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
-        #section-intro .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            z-index: -1;
         }
+
+        .social-links a:hover {
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--accent-glow);
+        }
+
+        .social-links a:hover::before {
+            left: 0;
+        }
+
         .scroll-down-indicator {
             position: absolute;
             bottom: 30px;
@@ -151,176 +268,338 @@
             transform: translateX(-50%);
             color: var(--text-muted);
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             animation: bounce 2s infinite;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
         }
+
+        .scroll-down-indicator:hover {
+            color: var(--primary-color);
+        }
+
         .scroll-down-indicator i {
             display: block;
-            margin: 0 auto 5px;
+            margin: 0 auto 8px;
+            font-size: 1.2rem;
         }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -10px); }
-            60% { transform: translate(-50%, -5px); }
+            40% { transform: translate(-50%, -15px); }
+            60% { transform: translate(-50%, -8px); }
         }
 
-
-        /* --- About Section --- */
+        /* About Section */
         #section-about .about-container {
-            display: flex;
-            gap: 3rem;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 4rem;
             text-align: left;
             align-items: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--card-shadow);
         }
-        #section-about .about-text {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 1rem;
-        }
-        #section-about .profile-img {
-            width: 150px;
-            height: 150px;
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary-color);
+            border: 4px solid transparent;
+            background: var(--gradient-primary);
+            padding: 4px;
             box-shadow: var(--accent-glow);
-        }
-        .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: flex-start; }
-        .skill { background-color: var(--bg-accent); color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.9rem; font-family: var(--font-mono); border: 1px solid var(--border-color); transition: var(--transition); }
-        .skill:hover { background-color: var(--primary-color); color: var(--bg-color); transform: translateY(-2px); }
-
-
-        /* --- Experience Section --- */
-        .experience-item {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: left;
             transition: var(--transition);
         }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+        }
+
+        .about-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
+        }
+
+        .skill {
+            background: var(--bg-card);
+            color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            border: 2px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .skill:hover {
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .skill:hover::before {
+            left: 0;
+        }
+
+        /* Experience Section */
+        .experience-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: left;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
         .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
             border-color: var(--primary-color);
         }
+
+        .experience-item:hover::before {
+            width: 8px;
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
         .experience-item h3 {
             color: var(--text-color);
             font-weight: 600;
-            margin: 0 0 0.25rem 0;
+            margin: 0 0 0.5rem 0;
             font-family: var(--font-sans);
-        }
-        .experience-duration {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-        .experience-item p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 1.3rem;
         }
 
-        /* --- Projects Section --- */
-        .projects-container {
-            height: calc(100% - 80px); /* Full height minus title */
-            width: 100%;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .experience-duration {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .projects-container::-webkit-scrollbar {
-            display: none;
+
+        .experience-item p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Projects Section - Enhanced Grid Layout */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-accent);
+        }
+
+        .projects-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .projects-grid::-webkit-scrollbar-track {
+            background: var(--bg-accent);
+            border-radius: 4px;
+        }
+
+        .projects-grid::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
         }
 
         .project-card {
-            height: 100%;
-            width: 100%;
-            scroll-snap-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .project-card-content {
-            background: var(--bg-accent);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2.5rem;
-            max-width: 700px;
-            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
             text-align: left;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             position: relative;
-        }
-        .project-card-content:hover {
-             box-shadow: 0 0 25px rgba(0,0,0,0.3);
-             border-color: var(--secondary-color);
+            overflow: hidden;
+            height: fit-content;
         }
 
-        .project-card-content h3 {
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card h3 {
             font-family: var(--font-sans);
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: var(--text-color);
             margin: 0 0 1rem 0;
+            font-weight: 600;
         }
+
         .project-tags {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
+
         .project-tag {
             font-family: var(--font-mono);
-            font-size: 0.8rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            background-color: rgba(16, 185, 129, 0.1);
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            background: rgba(16, 185, 129, 0.1);
             color: var(--primary-color);
             border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: var(--transition);
         }
+
+        .project-tag:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: scale(1.05);
+        }
+
         .project-description {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
+
         .project-link {
             display: inline-flex;
             align-items: center;
             color: var(--primary-color);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: var(--font-mono);
             transition: var(--transition);
-            background: var(--bg-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
         .project-link:hover {
-            background-color: var(--primary-color);
             color: var(--bg-color);
             border-color: var(--primary-color);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
-        .project-link i { margin-right: 0.5rem; }
 
+        .project-link:hover::before {
+            left: 0;
+        }
 
-        /* --- Dot Navigation --- */
+        .project-link i {
+            margin-right: 0.5rem;
+        }
+
+        /* Enhanced Dot Navigation */
         #dot-nav {
             position: fixed;
             right: 25px;
             top: 50%;
             transform: translateY(-50%);
             z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 1rem 0.5rem;
         }
+
         #dot-nav ul {
             list-style: none;
         }
+
         #dot-nav li {
-            margin: 15px 0;
+            margin: 20px 0;
             position: relative;
         }
+
         #dot-nav a {
             display: block;
             width: 12px;
@@ -328,27 +607,101 @@
             background-color: var(--border-color);
             border-radius: 50%;
             transition: var(--transition);
-        }
-        #dot-nav a:hover, #dot-nav li.active a {
-            background-color: var(--primary-color);
-            transform: scale(1.2);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2.section-title { font-size: 1.5rem; }
-            #section-intro .subtitle { font-size: 1.1rem; }
-            #section-about .about-container { flex-direction: column; }
-            .project-card-content { padding: 1.5rem; }
-            .project-card-content h3 { font-size: 1.5rem; }
-            #dot-nav { display: none; }
+            position: relative;
         }
 
+        #dot-nav a::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        #dot-nav a:hover,
+        #dot-nav li.active a {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        #dot-nav li.active a::after {
+            border-color: var(--primary-color);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section {
+                padding: 1rem;
+            }
+            
+            #section-about .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+                padding: 2rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                justify-self: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-height: 60vh;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+            
+            .social-links {
+                gap: 1.5rem;
+            }
+            
+            .social-links a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            #dot-nav {
+                display: none;
+            }
+            
+            h2.section-title {
+                text-align: center;
+                padding-left: 0;
+            }
+            
+            h2.section-title i {
+                position: static;
+                margin-right: 1rem;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
-
     <nav id="dot-nav">
         <ul>
             <li data-menuanchor="intro" class="active"><a href="#intro"></a></li>
@@ -370,8 +723,8 @@
                     <a href="mailto:donghank@student.42.fr" title="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <div class="scroll-down-indicator">
-                <i class="fas fa-computer-mouse"></i>
+            <div class="scroll-down-indicator" onclick="document.getElementById('section-about').scrollIntoView()">
+                <i class="fas fa-mouse"></i>
                 Scroll Down
             </div>
         </section>
@@ -381,14 +734,20 @@
             <div class="section-container">
                 <h2 class="section-title"><i class="fas fa-user-astronaut"></i>About Me</h2>
                 <div class="about-container">
-                    <img src="profile_image.JPG" alt="Donghan Kim Profile Photo" class="profile-img" onerror="this.src='https://placehold.co/150x150/0f172a/e2e8f0?text=DK'; this.onerror=null;">
+                    <img src="profile_image.JPG" alt="Donghan Kim Profile Photo" class="profile-img" onerror="this.src='https://placehold.co/180x180/0f172a/e2e8f0?text=DK'; this.onerror=null;">
                     <div>
                         <p class="about-text">
                             I am a CS student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science. Passionate about all things AI/ML, I enjoy solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations.
                         </p>
-                        <h3><i class="fas fa-cogs"></i>Tech Stack</h3>
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-family: var(--font-mono);"><i class="fas fa-cogs"></i> Tech Stack</h3>
                         <div class="skills">
-                            <span class="skill">C</span> <span class="skill">C++</span> <span class="skill">Python</span> <span class="skill">Shell Script</span> <span class="skill">Linux</span> <span class="skill">Docker</span> <span class="skill">Git</span>
+                            <span class="skill">C</span>
+                            <span class="skill">C++</span>
+                            <span class="skill">Python</span>
+                            <span class="skill">Shell Script</span>
+                            <span class="skill">Linux</span>
+                            <span class="skill">Docker</span>
+                            <span class="skill">Git</span>
                         </div>
                     </div>
                 </div>
@@ -412,115 +771,163 @@
         <!-- Projects Section -->
         <section class="section" id="section-projects" data-section="projects">
             <div class="section-container">
-                <h2 class="section-title"><i class="fas fa-tasks"></i>Projects</h2>
-                <div class="projects-container">
+                <h2 class="section-title"><i class="fas fa-code"></i>Projects</h2>
+                <div class="projects-grid">
                     
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>Understanding of ML</h3>
-                            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">C++</span><span class="project-tag">ML</span><span class="project-tag">Transformer</span></div>
-                            <p class="project-description">Understanding of Machine Learning concepts and algorithms through hands-on projects, with a goal of implementing Transformers.</p>
-                            <a href="https://github.com/Donghan5/Understanding_of_ML" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>Understanding of ML</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">ML</span>
+                            <span class="project-tag">Transformer</span>
                         </div>
+                        <p class="project-description">Understanding of Machine Learning concepts and algorithms through hands-on projects, with a goal of implementing Transformers.</p>
+                        <a href="https://github.com/Donghan5/Understanding_of_ML" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>Code Educator</h3>
-                             <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">AI/ML</span><span class="project-tag">CLI</span></div>
-                            <p class="project-description">A CLI chatbot to help learn and practice coding. Developed in Python, designed for interactive learning of concepts.</p>
-                            <a href="https://github.com/Donghan5/code_educator" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>Code Educator</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">AI/ML</span>
+                            <span class="project-tag">CLI</span>
                         </div>
+                        <p class="project-description">A CLI chatbot to help learn and practice coding. Developed in Python, designed for interactive learning of concepts.</p>
+                        <a href="https://github.com/Donghan5/code_educator" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>ft_transcendence</h3>
-                            <div class="project-tags"><span class="project-tag">TypeScript</span><span class="project-tag">Full-Stack</span><span class="project-tag">Web App</span></div>
-                            <p class="project-description">Developed a full-stack web application featuring real-time multiplayer Pong, chat, and user profiles. (Currently in progress)</p>
-                            <a href="https://github.com/Donghan5/ft_transcendence" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>ft_transcendence</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">Full-Stack</span>
+                            <span class="project-tag">Web App</span>
                         </div>
+                        <p class="project-description">Developed a full-stack web application featuring real-time multiplayer Pong, chat, and user profiles. (Currently in progress)</p>
+                        <a href="https://github.com/Donghan5/ft_transcendence" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>Inception</h3>
-                            <div class="project-tags"><span class="project-tag">Docker</span><span class="project-tag">System Admin</span><span class="project-tag">Nginx</span></div>
-                            <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose, including services like Nginx, WordPress, and MariaDB.</p>
-                            <a href="https://github.com/Donghan5/inception" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>Inception</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Docker</span>
+                            <span class="project-tag">System Admin</span>
+                            <span class="project-tag">Nginx</span>
                         </div>
+                        <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose, including services like Nginx, WordPress, and MariaDB.</p>
+                        <a href="https://github.com/Donghan5/inception" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>webserv</h3>
-                            <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">Networking</span><span class="project-tag">HTTP</span></div>
-                            <p class="project-description">Developed a simple HTTP server in C++ that handles GET and POST requests, demonstrating understanding of web protocols and socket programming.</p>
-                            <a href="https://github.com/Donghan5/webserv" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>webserv</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">Networking</span>
+                            <span class="project-tag">HTTP</span>
                         </div>
+                        <p class="project-description">Developed a simple HTTP server in C++ that handles GET and POST requests, demonstrating understanding of web protocols and socket programming.</p>
+                        <a href="https://github.com/Donghan5/webserv" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>CPP Modules</h3>
-                            <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">OOP</span></div>
-                            <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming concepts and practices.</p>
-                            <a href="https://github.com/Donghan5/CPP_Modules" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>CPP Modules</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C++</span>
+                            <span class="project-tag">OOP</span>
                         </div>
+                        <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming concepts and practices.</p>
+                        <a href="https://github.com/Donghan5/CPP_Modules" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>miniRT</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Graphics</span><span class="project-tag">Ray Tracing</span></div>
-                            <p class="project-description">Implemented a ray tracing engine in C to render 3D scenes with various geometric objects and lighting effects.</p>
-                            <a href="https://github.com/Donghan5/miniRT" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>miniRT</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Graphics</span>
+                            <span class="project-tag">Ray Tracing</span>
                         </div>
+                        <p class="project-description">Implemented a ray tracing engine in C to render 3D scenes with various geometric objects and lighting effects.</p>
+                        <a href="https://github.com/Donghan5/miniRT" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>minishell</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">System Programming</span><span class="project-tag">Shell</span></div>
-                            <p class="project-description">Developed a simple UNIX shell implementation with command parsing, execution, and basic job control features.</p>
-                            <a href="https://github.com/Donghan5/minishell" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>minishell</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">System Programming</span>
+                            <span class="project-tag">Shell</span>
                         </div>
+                        <p class="project-description">Developed a simple UNIX shell implementation with command parsing, execution, and basic job control features.</p>
+                        <a href="https://github.com/Donghan5/minishell" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>Philosophers</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Multithreading</span><span class="project-tag">Concurrency</span></div>
-                            <p class="project-description">Solved the dining philosophers problem using C threads and mutexes to prevent deadlocks and ensure fair resource access.</p>
-                            <a href="https://github.com/Donghan5/philosopher" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>Philosophers</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Multithreading</span>
+                            <span class="project-tag">Concurrency</span>
                         </div>
+                        <p class="project-description">Solved the dining philosophers problem using C threads and mutexes to prevent deadlocks and ensure fair resource access.</p>
+                        <a href="https://github.com/Donghan5/philosopher" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
                     
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>push_swap</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Algorithm</span><span class="project-tag">Sorting</span></div>
-                            <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations, optimizing for the fewest moves.</p>
-                            <a href="https://github.com/Donghan5/push_swap" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>push_swap</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Algorithm</span>
+                            <span class="project-tag">Sorting</span>
                         </div>
+                        <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations, optimizing for the fewest moves.</p>
+                        <a href="https://github.com/Donghan5/push_swap" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>ft_printf</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Library</span><span class="project-tag">Formatting</span></div>
-                            <p class="project-description">Implemented a custom printf function in C to handle formatted output with variable argument lists.</p>
-                            <a href="https://github.com/Donghan5/ft_printf" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>ft_printf</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Library</span>
+                            <span class="project-tag">Formatting</span>
                         </div>
+                        <p class="project-description">Implemented a custom printf function in C to handle formatted output with variable argument lists.</p>
+                        <a href="https://github.com/Donghan5/ft_printf" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-card-content">
-                            <h3>Libft</h3>
-                            <div class="project-tags"><span class="project-tag">C</span><span class="project-tag">Library</span><span class="project-tag">Utilities</span></div>
-                            <p class="project-description">Developed a custom C library with essential functions to enhance programming efficiency and code reusability.</p>
-                            <a href="https://github.com/Donghan5/Libft" target="_blank" class="project-link"><i class="fab fa-github"></i> View on GitHub</a>
+                        <h3>Libft</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Library</span>
+                            <span class="project-tag">Utilities</span>
                         </div>
+                        <p class="project-description">Developed a custom C library with essential functions to enhance programming efficiency and code reusability.</p>
+                        <a href="https://github.com/Donghan5/Libft" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
                     </div>
 
                 </div>
@@ -533,16 +940,18 @@
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section');
             const navLi = document.querySelectorAll("#dot-nav ul li");
+            const fullpage = document.getElementById('fullpage');
 
+            // Enhanced intersection observer for smoother animations
             const observerOptions = {
-                root: document.querySelector('#fullpage'), // Observe within the scroll container
-                rootMargin: '0px',
-                threshold: 0.6 // Trigger when 60% of the section is visible
+                root: fullpage,
+                rootMargin: '-10% 0px -10% 0px',
+                threshold: [0.3, 0.7]
             };
 
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
                         // Add is-visible class for fade-in animation
                         entry.target.classList.add('is-visible');
 
@@ -561,6 +970,54 @@
             sections.forEach(section => {
                 sectionObserver.observe(section);
             });
+
+            // Smooth scroll for dot navigation
+            navLi.forEach(li => {
+                li.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetSection = li.dataset.menuanchor;
+                    const targetElement = document.querySelector(`[data-section="${targetSection}"]`);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Enhanced scroll behavior for projects grid
+            const projectsGrid = document.querySelector('.projects-grid');
+            if (projectsGrid) {
+                let isScrolling = false;
+                
+                projectsGrid.addEventListener('scroll', () => {
+                    if (!isScrolling) {
+                        window.requestAnimationFrame(() => {
+                            // Add smooth scrolling indicators or effects here if needed
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                });
+            }
+
+            // Add loading animation
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add some interactive hover effects
+        document.addEventListener('mousemove', (e) => {
+            const cursor = { x: e.clientX, y: e.clientY };
+            
+            // Parallax effect for background elements
+            const moveX = (cursor.x - window.innerWidth / 2) * 0.01;
+            const moveY = (cursor.y - window.innerHeight / 2) * 0.01;
+            
+            document.body.style.setProperty('--mouse-x', `${moveX}px`);
+            document.body.style.setProperty('--mouse-y', `${moveY}px`);
         });
     </script>
 </body>
